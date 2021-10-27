@@ -34,4 +34,4 @@ jobs:
           context: ./search_engine_ui
           file: ./search_engine_ui/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/crawler:1.0
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/crawler-ui:1.0
