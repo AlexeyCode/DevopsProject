@@ -1,4 +1,4 @@
-name: build and push srawler image
+name: build and push crawler-ui image
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - 'search_engine_ui/ui/templates/**.html'
       - 'search_engine_ui/Dockerfile'
 jobs:
-  docker:
+  Docker:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -34,4 +34,18 @@ jobs:
           context: ./search_engine_ui
           file: ./search_engine_ui/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/crawler-ui:1.0
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/crawler-ui:1.2
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: Docker
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+
+      - uses: actions-hub/kubectl@master
+        with:
+          args: apply -f ./kubernetes

@@ -19,7 +19,7 @@ spec:
         component: crawler-ui
     spec:
       containers:
-        - image: devopstank/crawler-ui:latest
+        - image: devopstank/crawler-ui:1.2
           name: crawler-ui
           imagePullPolicy: IfNotPresent
           env:
