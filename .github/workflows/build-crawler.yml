@@ -6,6 +6,7 @@ on:
       - 'search_engine_crawler/**.txt'
       - 'search_engine_crawler/crawler/**.py'
       - 'search_engine_crawler/tests/**.py'
+      - 'search_engine_crawler/Dockerfile'
 jobs:
   docker:
     runs-on: ubuntu-latest

@@ -7,6 +7,7 @@ on:
       - 'search_engine_ui/ui/**.py'
       - 'search_engine_ui/tests/**.py'
       - 'search_engine_ui/ui/templates/**.html'
+      - 'search_engine_ui/Dockerfile'
 jobs:
   docker:
     runs-on: ubuntu-latest
