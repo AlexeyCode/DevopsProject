@@ -10,4 +10,3 @@ WORKDIR /app/ui
 
 RUN FLASK_APP=ui.py
 CMD ["gunicorn", "ui:app", "-b", "0.0.0.0"]
-
