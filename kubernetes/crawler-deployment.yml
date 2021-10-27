@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crawler
+  labels:
+    app: parser
+    component: crawler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parser
+      component: crawler
+  template:
+    metadata:
+      name: crawler-pod
+      labels:
+        app: parser
+        component: crawler
+    spec:
+      containers:
+        - image: devopstank/crawler:0.1
+          name: crawler
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO
+              value: mongodb
+            - name: MONGO_PORT
+              value: "27017"
+            - name: EXCLUDE_URLS
+              value: .*github.com
+            - name: RMQ_HOST
+              value: rabbitmq
+            - name: RMQ_QUEUE
+              value: rabbitmq
+            - name: RMQ_USERNAME
+              value: uzver
+            - name: RMQ_PASSWORD
+              value: someStronk
+            - name: CHECK_INTERVAL
+              value: "1000000"

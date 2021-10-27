@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels:
+    app: parser
+    component: rabbitmq
+    rabbitmq: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parser
+      component: rabbitmq
+  template:
+    metadata:
+      name: rabbitmq
+      labels:
+        app: parser
+        component: rabbitmq
+        rabbitmq: "true"
+    spec:
+      containers:
+        - image: bitnami/rabbitmq:latest
+          name: rabbitmq
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RABBITMQ_USERNAME
+              value: uzver
+            - name: RABBITMQ_PASSWORD
+              value: someStronk
+
+

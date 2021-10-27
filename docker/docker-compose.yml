@@ -1,0 +1,56 @@
+version: '3.3'
+services:
+  bot_db:
+    image: mongo:3.2
+    volumes:
+      - bot_db:/data/db
+    networks:
+      - bot
+
+  crawler:
+    build: ../search_engine_crawler
+    depends_on:
+      - bot_db
+      - rabbitmq
+    image: devopstank/crawler:latest
+    networks:
+      - bot
+    environment:
+      - EXCLUDE_URLS=.*github.com
+      - MONGO=mongodb://bot_db
+      - MONGO_PORT=27017
+      - RMQ_HOST=rabbitmq
+      - RMQ_QUEUE=rabbitmq
+      - RMQ_USERNAME=uzver
+      - RMQ_PASSWORD=someStronk
+      - CHECK_INTERVAL=1000000
+
+  rabbitmq:
+    image: bitnami/rabbitmq:latest
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    networks:
+      - bot
+    environment:
+      - RABBITMQ_USERNAME=uzver
+      - RABBITMQ_PASSWORD=someStronk
+
+  crawler-ui:
+    build: ../search_engine_ui
+    image: devopstank/crawler-ui:0.6
+    ports:
+      - '8000:8000'
+    networks:
+      - bot
+    environment:
+      - MONGO=mongodb://bot_db
+      - MONGO_PORT=27017
+#      - FLASK_APP=/app/ui/ui.py
+volumes:
+  bot_db:
+
+
+
+networks:
+  bot:

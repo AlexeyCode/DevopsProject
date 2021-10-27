@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: parser
+    component: mongodb
+    mongo-db: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parser
+      component: mongodb
+  template:
+    metadata:
+      name: mongodb
+      labels:
+        app: parser
+        component: mongodb
+        mongodb: "true"
+    spec:
+      containers:
+        - image: mongo:3.2
+          name: mongo
+          imagePullPolicy: IfNotPresent
+#          volumeMounts:
+#            - name: mongo-persistent-storage
+#              mountPath: /data/db
+#      volumes:
+#        - name: mongo-persistent-storage
+#          persistentVolumeClaim:
+#            claimName: mongo-pvc

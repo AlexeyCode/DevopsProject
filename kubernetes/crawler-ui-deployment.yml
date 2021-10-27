@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crawler-ui
+  labels:
+    app: parser
+    component: crawler-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parser
+      component: crawler-ui
+  template:
+    metadata:
+      name: ui-pod
+      labels:
+        app: parser
+        component: crawler-ui
+    spec:
+      containers:
+        - image: devopstank/crawler-ui:0.7
+          name: crawler-ui
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO
+              value: mongodb
+            - name: MONGO_PORT
+              value: "27017"

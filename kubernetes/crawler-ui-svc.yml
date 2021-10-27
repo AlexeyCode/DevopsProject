@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crawler-ui
+  labels:
+    app: parser
+    component: crawler-ui
+spec:
+  selector:
+    app: parser
+    component: crawler-ui
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
