@@ -1,6 +1,6 @@
 Пререквизиты:
  - Развернуный managed service kubernetes в yandex cloud
-
+ - Установленный ingress по инструкции https://cloud.yandex.ru/docs/managed-kubernetes/solutions/ingress-cert-manager
  - Для запуска CI в github actions необходимо создать секреты в github:
 ```
 DOCKERHUB_USERNAME=dockerhub user
