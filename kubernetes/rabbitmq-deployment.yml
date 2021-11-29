@@ -21,7 +21,7 @@ spec:
         rabbitmq: "true"
     spec:
       containers:
-        - image: bitnami/rabbitmq:latest
+        - image: bitnami/rabbitmq:3.9.7
           name: rabbitmq
           imagePullPolicy: IfNotPresent
           env:

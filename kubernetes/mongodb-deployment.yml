@@ -24,10 +24,10 @@ spec:
         - image: mongo:3.2
           name: mongo
           imagePullPolicy: IfNotPresent
-#          volumeMounts:
-#            - name: mongo-persistent-storage
-#              mountPath: /data/db
-#      volumes:
-#        - name: mongo-persistent-storage
-#          persistentVolumeClaim:
-#            claimName: mongo-pvc
+          volumeMounts:
+            - name: mongo-persistent-storage
+              mountPath: /data/db
+      volumes:
+        - name: mongo-persistent-storage
+          persistentVolumeClaim:
+            claimName: mongo-claim-dynamic
